@@ -1,2 +1,2 @@
 Manifest-Version: 1.0
-Main-Class: io.github.jasonxqh.sdk.OpenAiCodeReview
+Main-Class: io.github.jasonxqh.middleware.sdk.OpenAiCodeReview

@@ -1,4 +1,4 @@
-package io.github.jasonxqh.sdk;
+package io.github.jasonxqh.middleware.sdk;
 
 public class OpenAiCodeReview {
 

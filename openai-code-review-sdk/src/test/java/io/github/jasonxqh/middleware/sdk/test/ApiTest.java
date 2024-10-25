@@ -1,4 +1,4 @@
-package io.github.jasonxqh.sdk.test;
+package io.github.jasonxqh.middleware.sdk.test;
 
 public class ApiTest {
 
