@@ -25,7 +25,7 @@ jobs:
 
       - name: Run Java code
         run: |
-         cd openai-code-review/src/main/java
+         cd openai-code-review-sdk/src/main/java
          javac io/github/jasonxqh/middleware/sdk/OpenAiCodeReview.java
          java io.github.middleware.sdk.OpenAiCodeReview
         
