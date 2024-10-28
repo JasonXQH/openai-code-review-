@@ -28,6 +28,7 @@ public class OpenAiCodeReview {
         if(null == githubToken|| githubToken.isEmpty()) {
             throw new RuntimeException("Token is empty");
         }
+        System.out.println("GITHUB_TOKEN: " + githubToken);
         ProcessBuilder processBuilder = new ProcessBuilder("git", "diff", "HEAD~1", "HEAD");
         processBuilder.directory(new File("."));
 
