@@ -151,6 +151,7 @@ public class OpenAiCodeReview {
             dateFolder.mkdirs();
         }
 
+
         String fileName = generateRandomString(12)+".md";
         File newFile = new File(dateFolder, fileName);
         try(FileWriter fw = new FileWriter(newFile)) {
