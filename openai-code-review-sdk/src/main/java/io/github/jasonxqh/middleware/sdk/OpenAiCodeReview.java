@@ -158,8 +158,11 @@ public class OpenAiCodeReview {
         }
 
         git.add().addFilepattern(dateFolder+"/"+fileName).call();
+        System.out.println("git add 完成");
         git.commit().setMessage("Add new File").call();
+        System.out.println("git commit 完成");
         git.push().setCredentialsProvider(new UsernamePasswordCredentialsProvider(token, "")).call();
+        System.out.println("git push 完成");
         return "https://github.com/JasonXQH/openai-code-review-log/blob/master/"+dateFolderName+"/"+fileName;
     }
     // 生成指定长度的随机字符串

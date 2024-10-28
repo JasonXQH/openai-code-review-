@@ -33,7 +33,7 @@ jobs:
       - name: Run code Review by XQH
         run: java -jar ./libs/openai-code-review-sdk-1.0.jar
         env:
-          GITHUB_TOKEN: ${{secrets.CODE_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.CODE_TOKEN }}
 
 
 
