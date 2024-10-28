@@ -159,7 +159,7 @@ public class OpenAiCodeReview {
             fw.write(log);
         }
 
-        git.add().addFilepattern(dateFolder+"/"+fileName).call();
+        git.add().addFilepattern(dateFolderName+"/"+fileName).call();
         System.out.println("git add 完成");
         // 获取并打印 git 状态
         StatusCommand statusCommand = git.status();
@@ -167,8 +167,6 @@ public class OpenAiCodeReview {
         System.out.println("Added files: " + status.getAdded());
         System.out.println("Changed files: " + status.getChanged());
         System.out.println("Untracked files: " + status.getUntracked());
-
-
         git.commit().setMessage("Add new File").call();
         System.out.println("git commit 完成");
         git.push().setCredentialsProvider(new UsernamePasswordCredentialsProvider(token, "")).call();
