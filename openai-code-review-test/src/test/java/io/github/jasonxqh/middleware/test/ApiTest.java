@@ -19,6 +19,8 @@ public class ApiTest {
         sb.append(",");
         sb.append("21992e2");
         sb.append(",");
+        sb.append(",");
+        sb.append(",xqwe");
         System.out.println(sb);
     }
 

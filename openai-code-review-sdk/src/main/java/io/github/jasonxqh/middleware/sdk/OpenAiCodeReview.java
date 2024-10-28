@@ -5,18 +5,29 @@ import io.github.jasonxqh.middleware.sdk.domain.model.ChatCompletionRequest;
 import io.github.jasonxqh.middleware.sdk.domain.model.ChatCompletionSyncResponseDTO;
 import io.github.jasonxqh.middleware.sdk.domain.model.Model;
 import io.github.jasonxqh.middleware.sdk.types.utils.BearerTokenUtils;
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
+
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.Constants.CHARACTERS;
 
 public class OpenAiCodeReview {
 
-    public static void main(String[] args) throws IOException, InterruptedException {
-        System.out.println("测试执行");
+    public static void main(String[] args) throws IOException, InterruptedException, GitAPIException {
+        System.out.println("代码评审，测试执行");
         //1. 代码检出
-
+        String githubToken = System.getenv("GITHUB_TOKEN");
+        if(null == githubToken|| githubToken.isEmpty()) {
+            throw new RuntimeException("Token is empty");
+        }
         ProcessBuilder processBuilder = new ProcessBuilder("git", "diff", "HEAD~1", "HEAD");
         processBuilder.directory(new File("."));
 
@@ -38,6 +49,8 @@ public class OpenAiCodeReview {
         //2. chatglm 代码评审
         String log = codeReview(diffCode.toString());
         System.out.println("code review: " + log);
+        //写入评审日志
+        writeLog(githubToken,log);
     }
 
     private static String codeReview(String diffCode) throws IOException {
@@ -121,5 +134,44 @@ public class OpenAiCodeReview {
             throw new RuntimeException(e);
         }
         return urlConnection;
+    }
+    private static String writeLog(String token ,String log) throws IOException, GitAPIException {
+        Git git = Git.cloneRepository()
+                .setURI("https://github.com/JasonXQH/openai-code-review-log")
+                .setDirectory(new File("repo"))
+                .setCredentialsProvider(new UsernamePasswordCredentialsProvider(token, ""))
+                .call();
+
+        String dateFolderName = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+
+        File dateFolder = new File("repo/"+dateFolderName);
+        if(!dateFolder.exists()){
+            dateFolder.mkdirs();
+        }
+
+        String fileName = generateRandomString(12)+".md";
+        File newFile = new File(dateFolder, fileName);
+        try(FileWriter fw = new FileWriter(newFile)) {
+            fw.write(log);
+        }
+
+        git.add().addFilepattern(dateFolder+"/"+fileName).call();
+        git.commit().setMessage("Add new File").call();
+        git.push().setCredentialsProvider(new UsernamePasswordCredentialsProvider(token, "")).call();
+        return "https://github.com/JasonXQH/openai-code-review-log/blob/master/"+dateFolderName+"/"+fileName;
+    }
+    // 生成指定长度的随机字符串
+    private static String generateRandomString(int length) {
+        // 定义字符集
+        String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        Random random = new Random();
+        StringBuilder stringBuilder = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            // 随机选取字符
+            int index = random.nextInt(CHARACTERS.length());
+            stringBuilder.append(CHARACTERS.charAt(index));
+        }
+        return stringBuilder.toString();
     }
 }
