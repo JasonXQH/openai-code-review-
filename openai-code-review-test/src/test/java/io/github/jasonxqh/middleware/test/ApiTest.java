@@ -13,7 +13,13 @@ public class ApiTest {
 
     @Test
     public void test() {
-        System.out.println(Integer.parseInt("abc1234"));
+        StringBuilder sb = new StringBuilder();
+        sb.append("{");
+        sb.append("21992e1");
+        sb.append(",");
+        sb.append("21992e2");
+        sb.append(",");
+        System.out.println(sb);
     }
 
 }
