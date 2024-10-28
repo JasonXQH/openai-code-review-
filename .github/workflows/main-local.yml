@@ -22,7 +22,6 @@ jobs:
           distribution: 'temurin'
           java-version: '11'
 
-
       - name: Run Java code
         run: |
          cd openai-code-review-sdk/src/main/java
