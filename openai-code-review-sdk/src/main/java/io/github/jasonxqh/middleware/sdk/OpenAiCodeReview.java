@@ -8,7 +8,8 @@ import io.github.jasonxqh.middleware.sdk.types.utils.BearerTokenUtils;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
-
+import org.eclipse.jgit.api.Status;
+import org.eclipse.jgit.api.StatusCommand;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -160,6 +161,14 @@ public class OpenAiCodeReview {
 
         git.add().addFilepattern(dateFolder+"/"+fileName).call();
         System.out.println("git add 完成");
+        // 获取并打印 git 状态
+        StatusCommand statusCommand = git.status();
+        Status status = statusCommand.call();
+        System.out.println("Added files: " + status.getAdded());
+        System.out.println("Changed files: " + status.getChanged());
+        System.out.println("Untracked files: " + status.getUntracked());
+
+
         git.commit().setMessage("Add new File").call();
         System.out.println("git commit 完成");
         git.push().setCredentialsProvider(new UsernamePasswordCredentialsProvider(token, "")).call();
