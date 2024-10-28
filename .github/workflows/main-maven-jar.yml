@@ -30,7 +30,7 @@ jobs:
       - name: Copy openai-code-review-sdk JAR
         run: mvn dependency:copy -Dartifact=io.github.jasonxqh:openai-code-review-sdk:1.0 -DoutputDirectory=./libs
 
-      - name: Run code Review
+      - name: Run code Review by XQH
         run: java -jar ./libs/openai-code-review-sdk-1.0.jar
 
 
