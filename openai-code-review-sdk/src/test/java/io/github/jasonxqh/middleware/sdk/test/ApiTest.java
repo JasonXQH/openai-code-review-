@@ -1,22 +1,82 @@
 package io.github.jasonxqh.middleware.sdk.test;
 
+import com.alibaba.fastjson2.JSON;
+import io.github.jasonxqh.middleware.sdk.domain.model.ChatCompletionSyncResponseDTO;
+import io.github.jasonxqh.middleware.sdk.types.utils.BearerTokenUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-@Slf4j
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class ApiTest {
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
+public class ApiTest {
+    //dfa8338c03d73f7c322b7d99a43dcc91.GE3dUuzWPUYslQEw
     @Test
     public void test() {
-        System.out.println(Integer.parseInt("1234"));
-        System.out.println(Integer.parseInt("1236"));
-        System.out.println(Integer.parseInt("1235"));
-        System.out.println(Integer.parseInt("1237"));
+        String apiKey = "dfa8338c03d73f7c322b7d99a43dcc91.GE3dUuzWPUYslQEw";
+        String token = BearerTokenUtils.getToken(apiKey);
+        System.out.println(token);
+    }
+
+    @Test
+    public void test_http() throws IOException {
+        String apiKey = "dfa8338c03d73f7c322b7d99a43dcc91.GE3dUuzWPUYslQEw";
+        String token = BearerTokenUtils.getToken(apiKey);
+
+        URL url = new URL("https://open.bigmodel.cn/api/paas/v4/chat/completions");
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
+        urlConnection.setRequestMethod("POST");
+        urlConnection.setRequestProperty("Authorization", "Bearer " + token);
+        urlConnection.setRequestProperty("Content-Type", "application/json");
+        urlConnection.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
+        urlConnection.setDoOutput(true);
+
+        String code = "1+1";
+
+        String jsonInpuString = "{"
+                + "\"model\":\"glm-4-flash\","
+                + "\"messages\": ["
+                + "    {"
+                + "        \"role\": \"user\","
+                + "        \"content\": \"你是一个高级编程架构师，精通各类场景方案、架构设计和编程语言请，请您根据git diff记录，对代码做出评审。代码为: " + code + "\""
+                + "    }"
+                + "]"
+                + "}";
+
+        try(OutputStream os = urlConnection.getOutputStream()) {
+            byte[] bytes = jsonInpuString.getBytes("UTF-8");
+            os.write(bytes);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        int responseCode = urlConnection.getResponseCode();
+        System.out.println(responseCode);
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+        String inputLine;
+
+        StringBuilder response = new StringBuilder();
+
+        while((inputLine = reader.readLine()) != null) {
+            response.append(inputLine);
+        }
+
+        reader.close();
+        urlConnection.disconnect();
+
+        System.out.println(response);
+
+        ChatCompletionSyncResponseDTO chatCompletionSyncResponse = JSON.parseObject(response.toString(), ChatCompletionSyncResponseDTO.class);
+        System.out.println(chatCompletionSyncResponse.getChoices().get(0).getMessage().getContent());
     }
 
 }
