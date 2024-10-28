@@ -53,6 +53,12 @@
                 <version>4.13.1</version>
                 <scope>test</scope>
             </dependency>
+            <!-- JWT -->
+            <dependency>
+                <groupId>com.auth0</groupId>
+                <artifactId>java-jwt</artifactId>
+                <version>4.0.0</version>  <!-- 确保使用了正确的版本号 -->
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

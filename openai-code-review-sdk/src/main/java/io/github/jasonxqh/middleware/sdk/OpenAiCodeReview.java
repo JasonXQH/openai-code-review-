@@ -43,7 +43,7 @@ public class OpenAiCodeReview {
     private static String codeReview(String diffCode) throws IOException {
         String apiKey = "dfa8338c03d73f7c322b7d99a43dcc91.GE3dUuzWPUYslQEw";
         String token = BearerTokenUtils.getToken(apiKey);
-
+        System.out.println(token);
         HttpURLConnection urlConnection = getHttpURLConnection(token,diffCode);
 
         int responseCode = urlConnection.getResponseCode();
@@ -75,15 +75,6 @@ public class OpenAiCodeReview {
         urlConnection.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
         urlConnection.setDoOutput(true);
 
-        String jsonInpuString = "{"
-                + "\"model\":\"glm-4-flash\","
-                + "\"messages\": ["
-                + "    {"
-                + "        \"role\": \"user\","
-                + "        \"content\": \"你是一个高级编程架构师，精通各类场景方案、架构设计和编程语言请，请您根据git diff记录，对代码做出评审。代码为: " + diffCode + "\""
-                + "    }"
-                + "]"
-                + "}";
 
         ChatCompletionRequest chatCompletionRequest = new ChatCompletionRequest();
         chatCompletionRequest.setModel(Model.GLM_4_FLASH.getCode());
@@ -124,7 +115,7 @@ public class OpenAiCodeReview {
         });
 
         try(OutputStream os = urlConnection.getOutputStream()) {
-            byte[] bytes = jsonInpuString.getBytes("UTF-8");
+            byte[] bytes = JSON.toJSONString(chatCompletionRequest).getBytes("UTF-8");
             os.write(bytes);
         } catch (IOException e) {
             throw new RuntimeException(e);
