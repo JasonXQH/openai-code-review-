@@ -6,15 +6,14 @@ import io.github.jasonxqh.middleware.sdk.infrastructure.git.GitCommand;
 import io.github.jasonxqh.middleware.sdk.infrastructure.weixin.WeiXin;
 import io.github.jasonxqh.middleware.sdk.types.utils.BearerTokenUtils;
 import org.eclipse.jgit.api.errors.GitAPIException;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.net.URL;
+import java.util.logging.Logger;
 
 public class OpenAiCodeReview {
 
-    private static final Logger logger = LoggerFactory.getLogger(OpenAiCodeReview.class);
+    private final Logger logger = (Logger) LoggerFactory.getLogger(OpenAiCodeReview.class);
 
     //配置微信
 //    private final String weixin_appid = "wxfa4ad2fa0028f454";
