@@ -21,7 +21,7 @@ public class OpenAiCodeReview {
 //    private final String weixin_template_id = "osZKKHx4x3RuZnO41LCkS9AKPgtno0dzKL2W1FILwwU";
 //
 //    //配置ChatGLM
-//    private String chatglm_apiKeySecret= "dfa8338c03d73f7c322b7d99a43dcc91.GE3dUuzWPUYslQEw";
+    private static String chatglm_apiKeySecret= "dfa8338c03d73f7c322b7d99a43dcc91.GE3dUuzWPUYslQEw";
     private static String chatglm_apiHost = "https://open.bigmodel.cn/api/paas/v4/chat/completions";
     //Github配置
     private String github_review_log_uri;
@@ -54,7 +54,7 @@ public class OpenAiCodeReview {
         IOpenAI chatGLM = new ChatGLM(
 //                getEnv("CHATGLM_APIHOST"),
                 chatglm_apiHost,
-                getEnv("CHATGLM_APIKEYSECRET ")
+                chatglm_apiKeySecret
         );
 
         OpenAiCodeReviewService openAiCodeReviewService = new OpenAiCodeReviewService(gitCommand, chatGLM, weiXin);
