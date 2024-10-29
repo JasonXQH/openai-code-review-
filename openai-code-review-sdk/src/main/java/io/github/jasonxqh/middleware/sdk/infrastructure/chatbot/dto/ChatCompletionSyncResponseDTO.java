@@ -1,4 +1,4 @@
-package io.github.jasonxqh.middleware.sdk.domain.model;
+package io.github.jasonxqh.middleware.sdk.infrastructure.chatbot.dto;
 import java.util.List;
 
 

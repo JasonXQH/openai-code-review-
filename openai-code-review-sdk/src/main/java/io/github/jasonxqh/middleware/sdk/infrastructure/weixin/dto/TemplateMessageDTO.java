@@ -1,7 +1,4 @@
-package io.github.jasonxqh.middleware.sdk.infrastructure.gateway.dto;
-
-import java.util.HashMap;
-import java.util.Map;
+package io.github.jasonxqh.middleware.sdk.infrastructure.weixin.dto;
 
 import java.util.HashMap;
 import java.util.Map;

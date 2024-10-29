@@ -1,15 +1,11 @@
 package io.github.jasonxqh.middleware.sdk.test;
 
 import com.alibaba.fastjson2.JSON;
-import io.github.jasonxqh.middleware.sdk.domain.model.ChatCompletionSyncResponseDTO;
-import io.github.jasonxqh.middleware.sdk.infrastructure.gateway.dto.TemplateMessageDTO;
+import io.github.jasonxqh.middleware.sdk.infrastructure.chatbot.dto.ChatCompletionSyncResponseDTO;
+import io.github.jasonxqh.middleware.sdk.infrastructure.weixin.dto.TemplateMessageDTO;
 import io.github.jasonxqh.middleware.sdk.types.utils.BearerTokenUtils;
 import io.github.jasonxqh.middleware.sdk.types.utils.WXAccessTokenUtils;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.BufferedReader;
 import java.io.IOException;

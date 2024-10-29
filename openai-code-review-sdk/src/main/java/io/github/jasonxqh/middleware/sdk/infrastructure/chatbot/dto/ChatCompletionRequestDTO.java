@@ -1,8 +1,10 @@
-package io.github.jasonxqh.middleware.sdk.domain.model;
+package io.github.jasonxqh.middleware.sdk.infrastructure.chatbot.dto;
+
+import io.github.jasonxqh.middleware.sdk.domain.model.Model;
 
 import java.util.List;
 
-public class ChatCompletionRequest {
+public class ChatCompletionRequestDTO {
 
     private String model = Model.GLM_4_FLASH.getCode();
     private List<Prompt> messages;
