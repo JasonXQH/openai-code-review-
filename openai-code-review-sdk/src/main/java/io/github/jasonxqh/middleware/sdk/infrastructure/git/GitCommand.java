@@ -15,7 +15,6 @@ import java.util.Random;
 import java.util.logging.Logger;
 
 public class GitCommand {
-    private static final Logger logger = (Logger) LoggerFactory.getLogger(GitCommand.class);
 
     private final String githubReviewLogUri;
 
@@ -132,7 +131,7 @@ public class GitCommand {
         git.push().setCredentialsProvider(new UsernamePasswordCredentialsProvider(githubToken, "")).call();
         System.out.println("git push 完成");
 
-        logger.info("Openai-code-review git commit and push done!"+fileName);
+        System.out.println("Openai-code-review git commit and push done!"+fileName);
         return githubReviewLogUri+"/blob/master/"+dateFolderName+"/"+fileName;
 
 
