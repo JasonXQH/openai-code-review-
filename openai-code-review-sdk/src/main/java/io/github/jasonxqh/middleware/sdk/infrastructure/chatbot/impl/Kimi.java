@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * @created : 2024/10/29, 星期二
  **/
 public class Kimi implements IOpenAI {
-    private String apiHost = "https://api.moonshot.cn/v1";
+    private String apiHost = "https://api.moonshot.cn/v1/chat/completions";
     private String apiKeySecret = "sk-jOjzYzUyMte5M2sGWDSZaSGpTwvhRVGomKRgbgstvYCEr1aQ";
 
     public Kimi() {
