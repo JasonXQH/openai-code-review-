@@ -33,10 +33,12 @@ public class ChatGLM implements IOpenAI {
 
     @Override
     public ChatCompletionSyncResponseDTO completions(ChatCompletionRequestDTO request) throws Exception {
-
+        System.out.println("apiHost: "+apiHost);
         String token = BearerTokenUtils.getToken(apiKeySecret);
+
         URL url = new URL(apiHost);
-        System.out.println(token);
+
+        System.out.println("token: "+token);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestMethod("POST");
         urlConnection.setRequestProperty("Authorization", "Bearer " + token);
