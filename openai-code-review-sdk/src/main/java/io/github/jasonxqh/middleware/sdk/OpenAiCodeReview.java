@@ -52,8 +52,8 @@ public class OpenAiCodeReview {
         );
 
         IOpenAI chatGLM = new ChatGLM(
-//                getEnv("CHATGLM_APIHOST"),
-                chatglm_apiHost,
+                getEnv("CHATGLM_APIHOST"),
+//                chatglm_apiHost,
                 chatglm_apiKeySecret
         );
 
