@@ -4,8 +4,6 @@ import io.github.jasonxqh.middleware.sdk.infrastructure.chatbot.IOpenAI;
 import io.github.jasonxqh.middleware.sdk.infrastructure.git.GitCommand;
 import io.github.jasonxqh.middleware.sdk.infrastructure.weixin.WeiXin;
 import org.eclipse.jgit.api.errors.GitAPIException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
@@ -15,7 +13,7 @@ import java.io.IOException;
  * @created : 2024/10/29, 星期二
  **/
 public abstract class AbstractOpenAiCodeReviewService implements IOpenAiCodeReviewService {
-    private final Logger logger = LoggerFactory.getLogger(AbstractOpenAiCodeReviewService.class);
+//    private final Logger logger = LoggerFactory.getLogger(AbstractOpenAiCodeReviewService.class);
 
     protected final GitCommand gitCommand;
 
@@ -42,7 +40,7 @@ public abstract class AbstractOpenAiCodeReviewService implements IOpenAiCodeRevi
             //4.发送消息通知: 日志地址，通知的内容
             pushMessage(logUrl);
         }catch (Exception e){
-            logger.error("Openai-code-review error", e);
+            throw new RuntimeException(e);
         }
     }
 

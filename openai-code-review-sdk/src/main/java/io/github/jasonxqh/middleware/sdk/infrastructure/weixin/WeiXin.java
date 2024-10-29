@@ -19,7 +19,6 @@ import java.util.logging.Logger;
  * @created : 2024/10/29, 星期二
  **/
 public class WeiXin {
-    private final Logger logger = (Logger) LoggerFactory.getLogger(WeiXin.class);
 
     private final String appid;
     private final String secret;
