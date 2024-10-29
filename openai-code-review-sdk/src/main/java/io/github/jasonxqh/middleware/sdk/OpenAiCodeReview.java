@@ -13,7 +13,6 @@ import java.util.logging.Logger;
 
 public class OpenAiCodeReview {
 
-    private final Logger logger = (Logger) LoggerFactory.getLogger(OpenAiCodeReview.class);
 
     //配置微信
 //    private final String weixin_appid = "wxfa4ad2fa0028f454";
@@ -60,7 +59,7 @@ public class OpenAiCodeReview {
         OpenAiCodeReviewService openAiCodeReviewService = new OpenAiCodeReviewService(gitCommand, chatGLM, weiXin);
         openAiCodeReviewService.exec();
 
-        logger.info("openai-code-review done");
+        System.out.println("openai-code-review done");
     }
 
     private  static String getEnv(String key){
