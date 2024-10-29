@@ -2,7 +2,9 @@ package io.github.jasonxqh.middleware.sdk.test;
 
 import com.alibaba.fastjson2.JSON;
 import io.github.jasonxqh.middleware.sdk.domain.model.ChatCompletionSyncResponseDTO;
+import io.github.jasonxqh.middleware.sdk.infrastructure.gateway.dto.TemplateMessageDTO;
 import io.github.jasonxqh.middleware.sdk.types.utils.BearerTokenUtils;
+import io.github.jasonxqh.middleware.sdk.types.utils.WXAccessTokenUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +17,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 
 public class ApiTest {
     //dfa8338c03d73f7c322b7d99a43dcc91.GE3dUuzWPUYslQEw
@@ -77,6 +81,42 @@ public class ApiTest {
 
         ChatCompletionSyncResponseDTO chatCompletionSyncResponse = JSON.parseObject(response.toString(), ChatCompletionSyncResponseDTO.class);
         System.out.println(chatCompletionSyncResponse.getChoices().get(0).getMessage().getContent());
+    }
+
+    @Test
+    public void test_wx(){
+        String accessToken = WXAccessTokenUtils.getAccessToken();
+        System.out.println(accessToken);
+        TemplateMessageDTO weixinTemplateMessageDTO = new TemplateMessageDTO();
+        weixinTemplateMessageDTO.put("project","big-market");
+        weixinTemplateMessageDTO.put("review","feat: 新加功能");
+        String url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="+accessToken;
+        sendPostRequest(url,JSON.toJSONString(weixinTemplateMessageDTO));
+
+    }
+
+
+    private static void sendPostRequest(String urlString, String jsonBody) {
+        try {
+            URL url = new URL(urlString);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json; utf-8");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setDoOutput(true);
+
+            try (OutputStream os = conn.getOutputStream()) {
+                byte[] input = jsonBody.getBytes(StandardCharsets.UTF_8);
+                os.write(input, 0, input.length);
+            }
+
+            try (Scanner scanner = new Scanner(conn.getInputStream(), StandardCharsets.UTF_8.name())) {
+                String response = scanner.useDelimiter("\\A").next();
+                System.out.println(response);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
