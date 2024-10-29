@@ -37,10 +37,9 @@ public class Kimi implements IOpenAI {
     @Override
     public ChatCompletionSyncResponseDTO completions(ChatCompletionRequestDTO request) throws Exception {
         System.out.println("apiHost: "+apiHost);
-        String token = BearerTokenUtils.getToken(apiKeySecret);
+        String token = apiKeySecret;
 
         URL url = new URL(apiHost);
-
         System.out.println("token: "+token);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestMethod("POST");
