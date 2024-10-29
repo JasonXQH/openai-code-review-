@@ -31,9 +31,9 @@ public class OpenAiCodeReviewService extends AbstractOpenAiCodeReviewService {
     }
 
     @Override
-    protected String codeReview(String diffCode) throws Exception {
+    protected String codeReview(String diffCode,Model model) throws Exception {
         ChatCompletionRequestDTO chatCompletionRequestDTO = new ChatCompletionRequestDTO();
-        chatCompletionRequestDTO.setModel(Model.GLM_4_FLASH.getCode());
+        chatCompletionRequestDTO.setModel(model.getCode());
         chatCompletionRequestDTO.setMessages(new ArrayList<ChatCompletionRequestDTO.Prompt>() {
             private static final long serialVersionUID = -7988151926241837899L;
 

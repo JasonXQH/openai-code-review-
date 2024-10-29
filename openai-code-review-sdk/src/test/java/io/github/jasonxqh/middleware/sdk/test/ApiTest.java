@@ -27,10 +27,8 @@ public class ApiTest {
 
     @Test
     public void test_http() throws IOException {
-        String apiKey = "dfa8338c03d73f7c322b7d99a43dcc91.GE3dUuzWPUYslQEw";
-        String token = BearerTokenUtils.getToken(apiKey);
-
-        URL url = new URL("https://open.bigmodel.cn/api/paas/v4/chat/completions");
+        String token = "sk-jOjzYzUyMte5M2sGWDSZaSGpTwvhRVGomKRgbgstvYCEr1aQ";
+        URL url = new URL("https://api.moonshot.cn/v1/chat/completions");
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
         urlConnection.setRequestMethod("POST");
@@ -42,7 +40,7 @@ public class ApiTest {
         String code = "1+1";
 
         String jsonInpuString = "{"
-                + "\"model\":\"glm-4-flash\","
+                + "\"model\":\"moonshot-v1-8k\","
                 + "\"messages\": ["
                 + "    {"
                 + "        \"role\": \"user\","

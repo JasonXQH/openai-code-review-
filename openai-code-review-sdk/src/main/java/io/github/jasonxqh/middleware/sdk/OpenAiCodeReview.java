@@ -1,4 +1,5 @@
 package io.github.jasonxqh.middleware.sdk;
+import io.github.jasonxqh.middleware.sdk.domain.model.Model;
 import io.github.jasonxqh.middleware.sdk.domain.service.impl.OpenAiCodeReviewService;
 import io.github.jasonxqh.middleware.sdk.infrastructure.chatbot.IOpenAI;
 import io.github.jasonxqh.middleware.sdk.infrastructure.chatbot.impl.ChatGLM;
@@ -54,8 +55,8 @@ public class OpenAiCodeReview {
 
 //        OpenAiCodeReviewService openAiCodeReviewService = new OpenAiCodeReviewService(gitCommand, chatGLM, weiXin);
         OpenAiCodeReviewService openAiCodeReviewService = new OpenAiCodeReviewService(gitCommand, kimi, weiXin);
-
-        openAiCodeReviewService.exec();
+        Model kimiModel = Model.MOONSHOT_V1_8K;
+        openAiCodeReviewService.exec(kimiModel);
 
         System.out.println("openai-code-review done");
     }
