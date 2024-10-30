@@ -27,7 +27,7 @@ jobs:
         run: mkdir -p ./libs
 
       - name: Download openai-code-review-sdk JAR
-        run: wget -O ./libs/openai-code-review-sdk-1.0.jar https://objects.githubusercontent.com/github-production-release-asset-2e65be/878284646/30778be5-4e6d-4c9b-b9dd-e6e93200745b?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=releaseassetproduction%2F20241030%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20241030T052332Z&X-Amz-Expires=300&X-Amz-Signature=b064652d2bf065266df41e664983b5ab2f28816488e5701db234740e04ddef62&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3Dopenai-code-review-sdk-1.0.jar&response-content-type=application%2Foctet-stream
+        run: wget -O ./libs/openai-code-review-sdk-1.0.jar https://github.com/JasonXQH/openai-code-review-/releases/download/v1.0.0/openai-code-review-sdk-1.0.jar
 
 
       - name: Get repository name
