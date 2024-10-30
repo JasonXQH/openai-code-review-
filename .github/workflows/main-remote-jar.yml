@@ -27,7 +27,7 @@ jobs:
         run: mkdir -p ./libs
 
       - name: Download openai-code-review-sdk JAR
-        run: wget -O ./libs/openai-code-review-sdk-1.0.jar https://github.com/JasonXQH/openai-code-review-/releases/download/untagged-8c83c82fbb7868c43daf/openai-code-review-sdk-1.0.jar
+        run: wget -O ./libs/openai-code-review-sdk-1.0.jar https://file.gitcode.com/4258633/releases/untagger_17098d3c96e34c75b49528f384b00385/openai-code-review-sdk-1.0.jar
 
 
       - name: Get repository name
